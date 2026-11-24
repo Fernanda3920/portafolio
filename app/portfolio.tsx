@@ -78,6 +78,21 @@ const projects = [
     label: 'Datos en tiempo real',
     link: 'https://github.com/Fernanda3920/Monitoreo-de-Sensores-Ambientales-con-MQTT',
   },
+  {
+    number: '08',
+    title: 'AgendaPRO UABC Las Palmas.',
+    type: 'SALUD · GESTIÓN DE CITAS',
+    description: 'Plataforma web para médicos y pacientes que permite agendar citas, gestionar consultas y mantener auditorías de actividad. Actualmente en implementación en UABC Las Palmas.',
+    tags: ['Agenda médica', 'Gestión de pacientes', 'Consultas', 'Auditoría'],
+    visual: 'agenda',
+    label: 'En implementación · UABC Las Palmas',
+    link: null,
+    images: [
+      '/Captura de pantalla 2026-11-24 120703-agenda.png',
+      '/Captura de pantalla 2026-11-24 120738-agenda.png',
+      '/Captura de pantalla 2026-11-24 120815-agenda.png',
+    ],
+  },
 ]
 
 const skills = ['JavaScript', 'Python', 'React Native', 'React', 'Node.js', 'C# / .NET', 'SQL Server', 'PostgreSQL', 'AWS', 'Google Cloud', 'IoT / MQTT', 'Redes']
