@@ -1,4 +1,5 @@
 import { ArrowDownRight, ArrowRight, ArrowUpRight, CodeXml, Mail, MapPin, MoveUpRight } from 'lucide-react'
+import ProjectGallery from '../components/project-gallery'
 
 const projects = [
   {
@@ -45,7 +46,7 @@ const projects = [
     visual: 'pharmacy',
     label: 'Gestión empresarial',
     link: null,
-    images: ['/funcion_reportes.png'],
+    images: ['/funcion_reportes.png', '/apariencia_sistema.png'],
   },
   {
     number: '05',
@@ -53,10 +54,7 @@ const projects = [
     type: 'SISTEMA WEB · INVENTARIO RESTAURANTERO',
     description: 'Herramienta para coordinar recetas, insumos y existencias. Registra movimientos, automatiza acciones operativas y compara el inventario teórico —calculado a partir de las operaciones— con el conteo físico para detectar diferencias.',
     tags: ['JavaScript', 'React', 'Vite', 'Node.js', 'PostgreSQL · contenedores'],
-    visual: 'restaurant',
-    label: 'Inventario conectado',
     link: null,
-    images: ['/apariencia_sistema.png'],
   },
   {
     number: '06',
@@ -94,6 +92,12 @@ const projects = [
     ],
   },
 ]
+
+type Project = (typeof projects)[number]
+
+function hasProjectImages(project: Project): project is Project & { images: string[] } {
+  return project.images !== undefined
+}
 
 const skills = ['JavaScript', 'Python', 'React Native', 'React', 'Node.js', 'C# / .NET', 'SQL Server', 'PostgreSQL', 'AWS', 'Google Cloud', 'IoT / MQTT', 'Redes']
 
@@ -141,12 +145,10 @@ export default function Portfolio() {
       <section className="projects-section" id="proyectos">
         <div className="section-heading"><div><p className="section-kicker">SELECCIÓN 2024 — 2026</p><h2>Trabajo con <span className="serif-accent">intención.</span></h2></div><p className="section-note">Una selección de proyectos donde la tecnología se encuentra con necesidades reales.</p></div>
         <div className="featured-projects">
-          {projects.filter(project => project.images).map((project) => <article className="featured-project" key={project.number}>
+          {projects.filter(hasProjectImages).map((project) => <article className="featured-project" key={project.number}>
             <div className={`featured-project-media ${project.visual}`}>
               <span className="visual-label">{project.label}</span>
-              {project.images && project.images.length > 1 && project.visual === 'care'
-                ? <div className="phone-gallery">{project.images.map((image, index) => <img key={image} src={image} alt={`${project.title} — pantalla ${index + 1}`} />)}</div>
-                : <div className="desktop-gallery">{project.images?.map((image) => <img key={image} src={image} alt={project.title} />)}</div>}
+              <ProjectGallery images={project.images} title={project.title} variant={project.visual === 'care' ? 'phone' : 'desktop'} />
             </div>
             <div className="featured-project-content">
               <div className="project-meta"><span>{project.type}</span><span>{project.number}</span></div>
@@ -158,7 +160,7 @@ export default function Portfolio() {
           </article>)}
         </div>
         <div className="text-project-list">
-          {projects.filter(project => !project.images).map((project) => <article className="text-project" key={project.number}>
+          {projects.filter(project => !hasProjectImages(project)).map((project) => <article className="text-project" key={project.number}>
             <span className="text-project-number">{project.number}</span>
             <div className="text-project-main">
               <p className="text-project-type">{project.type}</p>
